@@ -1,0 +1,27 @@
+version: '3.2'
+services:
+  localstack:
+    container_name: localstackTest
+    image: localstack/localstack:0.14.1
+    restart: "always"
+    environment:
+      - LOCALSTACK_SERVICES=sqs
+      - DATA_DIR=${LOCALSTACK_DATA_DIR:-/tmp/localstack/data}
+      - DEBUG=1
+    ports:
+      - "4566:4566"
+  setup-fake-aws-resources:
+    container_name: setup-fake-aws-resources
+    image: amazon/aws-cli:2.4.27
+    depends_on:
+      - localstack
+    volumes:
+      - ./localstack:/localstack
+    environment:
+      - HOSTNAME=localstack
+      - LOCALSTACK_HOSTNAME=localstack
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=dummyaccess
+      - AWS_SECRET_ACCESS_KEY=dummysecret
+    entrypoint: /bin/sh -c
+    command: ./setup.sh
