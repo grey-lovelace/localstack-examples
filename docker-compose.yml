@@ -2,10 +2,10 @@ version: '3.2'
 services:
   localstack:
     container_name: localstackTest
-    image: localstack/localstack:1.0.0
+    image: localstack/localstack:1.1.0
     restart: "always"
     environment:
-      - LOCALSTACK_SERVICES=sqs
+      - LOCALSTACK_SERVICES=sqs,s3
       - DATA_DIR=${LOCALSTACK_DATA_DIR:-/tmp/localstack/data}
       - DEBUG=1
     ports:
@@ -26,5 +26,5 @@ services:
       - AWS_ACCESS_KEY_ID=dummyaccess
       - AWS_SECRET_ACCESS_KEY=dummysecret
     entrypoint: /bin/sh -c
-    command: /localstack/sqs.sh
+    command: /localstack/setup.sh
             
