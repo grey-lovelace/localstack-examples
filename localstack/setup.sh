@@ -7,7 +7,7 @@ export PRIMARY_SQS=queue
 export SECONDARY_SQS=queue-secondary
 export DLQ_SQS=queue-dead-letter
 
-while ! aws iam get-user
+until aws iam get-user
 do
     echo "########### Waiting for localstack to be available ###########"
 done
