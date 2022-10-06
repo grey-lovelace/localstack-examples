@@ -18,10 +18,7 @@ services:
     volumes:
       - ./localstack:/localstack
     environment:
-      - HOSTNAME=localstack
-      - LOCALSTACK_HOSTNAME=localstack
-      - URL=http://localstack:4566
-      - URL_LOCAL=http://localhost:4566
+      - LOCALSTACK_URL=http://localstack:4566
       - AWS_DEFAULT_REGION=us-east-1
       - AWS_ACCESS_KEY_ID=dummyaccess
       - AWS_SECRET_ACCESS_KEY=dummysecret
